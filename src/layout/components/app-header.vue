@@ -1,10 +1,8 @@
 <template>
 <div class='header'>
   <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-    <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-    <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-    <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+    <el-breadcrumb-item style="cursor: pointer" @click.native="handleJump">首页</el-breadcrumb-item>
+    <el-breadcrumb-item>{{title}}</el-breadcrumb-item>
   </el-breadcrumb>
   <el-dropdown>
     <span class="el-dropdown-link">
@@ -30,6 +28,12 @@
 import Vue from 'vue'
 import { getUserInfo } from '@/services/user'
 
+const nameMap = {
+  role: '角色列表',
+  menu: '菜单列表',
+  resource: '资源管理',
+  'resource-category': '资源分类'
+}
 export default Vue.extend({
   name: 'AppHeader',
   data () {
@@ -39,13 +43,19 @@ export default Vue.extend({
   },
   created () {
     this.loadUserInfo()
-    this.loadUserInfo()
+  },
+  computed: {
+    title () {
+      return nameMap[this.$route.name as keyof typeof nameMap]
+    }
   },
   methods: {
     async loadUserInfo () {
       const { data } = await getUserInfo()
       this.userInfo = data.content
-      console.log(data)
+    },
+    handleJump () {
+      this.$router.push('/').catch((err: any) => err)
     },
     handleLogout () {
       this.$confirm('确认退出吗?', '退出提示', {

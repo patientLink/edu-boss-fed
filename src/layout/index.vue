@@ -1,9 +1,9 @@
 <template>
-  <el-container>
-    <el-aside width="200px">
+  <el-container style="position: relative">
+    <el-aside style="width: 200px">
       <app-aside></app-aside>
     </el-aside>
-    <el-container>
+    <el-container style="position: relative">
       <el-header>
         <app-header></app-header>
       </el-header>
@@ -35,11 +35,25 @@ export default Vue.extend({
 }
 .el-aside {
   background: #d3dce6;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 11;
 }
 .el-header {
-  background: #fff;
+  background: #f8f9fb;
+  position: fixed;
+  width: 100%;
+  padding-left: 220px;
+  top: 0;
+  z-index: 10;
 }
 .el-main {
   background: #e9eef3;
+  position: absolute;
+  padding-left: 220px;
+  top: 60px;
+  width: 100vw;
+  min-width: 980px;
 }
 </style>

@@ -25,12 +25,14 @@ const routes: Array<RouteConfig> = [
     children: [
       {
         path: '',
-        name: 'home',
-        component: () => import(/* webpackChunkName: 'home' */'@/views/home/index.vue')
+        redirect: { name: 'role' }
+        // name: 'home',
+        // component: () => import(/* webpackChunkName: 'home' */'@/views/home/index.vue')
       },
       {
         path: '/role',
         name: 'role',
+        alias: '/',
         component: () => import(/* webpackChunkName: 'role' */'@/views/role/index.vue')
       },
       {
@@ -39,9 +41,24 @@ const routes: Array<RouteConfig> = [
         component: () => import(/* webpackChunkName: 'menu' */'@/views/menu/index.vue')
       },
       {
+        path: '/menu/create',
+        name: 'menu-create',
+        component: () => import(/* webpackChunkName: 'menu-create-edit' */'@/views/menu/create.vue')
+      },
+      {
+        path: '/menu/:id/edit',
+        name: 'menu-edit',
+        component: () => import(/* webpackChunkName: 'menu-create-edit' */'@/views/menu/edit.vue')
+      },
+      {
         path: '/resource',
         name: 'resource',
         component: () => import(/* webpackChunkName: 'resource' */'@/views/resource/index.vue')
+      },
+      {
+        path: '/resourceCategory',
+        name: 'resource-category',
+        component: () => import(/* webpackChunkName: 'resource-category' */'@/views/resource/resource-category.vue')
       },
       {
         path: '/course',
